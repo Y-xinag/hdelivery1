@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.RetReturnlistMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.RetReturnlist" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <id column="ApplicationNo" property="applicationno" jdbcType="VARCHAR" />
+    <result column="WorkSheetNo" property="worksheetno" jdbcType="VARCHAR" />
+    <result column="ReturnType" property="returntype" jdbcType="BIT" />
+    <result column="ApRemark" property="apremark" jdbcType="VARCHAR" />
+    <result column="ApLoss" property="aploss" jdbcType="INTEGER" />
+    <result column="EntryTime" property="entrytime" jdbcType="TIMESTAMP" />
+    <result column="ReceivegUnit" property="receivegunit" jdbcType="INTEGER" />
+    <result column="InvalidateSign" property="invalidatesign" jdbcType="BIT" />
+    <result column="ReturnUnit" property="returnunit" jdbcType="INTEGER" />
+    <result column="RecordingTime" property="recordingtime" jdbcType="DATE" />
+    <result column="EntryUnit" property="entryunit" jdbcType="INTEGER" />
+    <result column="PersonName" property="personname" jdbcType="VARCHAR" />
+    <result column="ConfirmationTime" property="confirmationtime" jdbcType="TIMESTAMP" />
+    <result column="ConfirmationUnit" property="confirmationunit" jdbcType="INTEGER" />
+    <result column="ConfirmationPersonName" property="confirmationpersonname" jdbcType="VARCHAR" />
+    <result column="TreatmentState" property="treatmentstate" jdbcType="BIT" />
+    <result column="ApReturnStatus" property="apreturnstatus" jdbcType="BIT" />
+    <result column="IdentificationSign" property="identificationsign" jdbcType="BIT" />
+    <result column="HandlingOpinions" property="handlingopinions" jdbcType="VARCHAR" />
+    <result column="DenialType" property="denialtype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ApplicationNo, WorkSheetNo, ReturnType, ApRemark, ApLoss, EntryTime, ReceivegUnit, 
+    InvalidateSign, ReturnUnit, RecordingTime, EntryUnit, PersonName, ConfirmationTime, 
+    ConfirmationUnit, ConfirmationPersonName, TreatmentState, ApReturnStatus, IdentificationSign, 
+    HandlingOpinions, DenialType
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.RetReturnlistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ret_returnlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.example.logistics.model.RetReturnlistKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ret_returnlist
+    where ID = #{id,jdbcType=INTEGER}
+      and ApplicationNo = #{applicationno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.logistics.model.RetReturnlistKey" >
+    delete from ret_returnlist
+    where ID = #{id,jdbcType=INTEGER}
+      and ApplicationNo = #{applicationno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.RetReturnlistExample" >
+    delete from ret_returnlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.RetReturnlist" >
+    insert into ret_returnlist (ID, ApplicationNo, WorkSheetNo, 
+      ReturnType, ApRemark, ApLoss, 
+      EntryTime, ReceivegUnit, InvalidateSign, 
+      ReturnUnit, RecordingTime, EntryUnit, 
+      PersonName, ConfirmationTime, ConfirmationUnit, 
+      ConfirmationPersonName, TreatmentState, ApReturnStatus, 
+      IdentificationSign, HandlingOpinions, DenialType
+      )
+    values (#{id,jdbcType=INTEGER}, #{applicationno,jdbcType=VARCHAR}, #{worksheetno,jdbcType=VARCHAR}, 
+      #{returntype,jdbcType=BIT}, #{apremark,jdbcType=VARCHAR}, #{aploss,jdbcType=INTEGER}, 
+      #{entrytime,jdbcType=TIMESTAMP}, #{receivegunit,jdbcType=INTEGER}, #{invalidatesign,jdbcType=BIT}, 
+      #{returnunit,jdbcType=INTEGER}, #{recordingtime,jdbcType=DATE}, #{entryunit,jdbcType=INTEGER}, 
+      #{personname,jdbcType=VARCHAR}, #{confirmationtime,jdbcType=TIMESTAMP}, #{confirmationunit,jdbcType=INTEGER}, 
+      #{confirmationpersonname,jdbcType=VARCHAR}, #{treatmentstate,jdbcType=BIT}, #{apreturnstatus,jdbcType=BIT}, 
+      #{identificationsign,jdbcType=BIT}, #{handlingopinions,jdbcType=VARCHAR}, #{denialtype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.RetReturnlist" >
+    insert into ret_returnlist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="applicationno != null" >
+        ApplicationNo,
+      </if>
+      <if test="worksheetno != null" >
+        WorkSheetNo,
+      </if>
+      <if test="returntype != null" >
+        ReturnType,
+      </if>
+      <if test="apremark != null" >
+        ApRemark,
+      </if>
+      <if test="aploss != null" >
+        ApLoss,
+      </if>
+      <if test="entrytime != null" >
+        EntryTime,
+      </if>
+      <if test="receivegunit != null" >
+        ReceivegUnit,
+      </if>
+      <if test="invalidatesign != null" >
+        InvalidateSign,
+      </if>
+      <if test="returnunit != null" >
+        ReturnUnit,
+      </if>
+      <if test="recordingtime != null" >
+        RecordingTime,
+      </if>
+      <if test="entryunit != null" >
+        EntryUnit,
+      </if>
+      <if test="personname != null" >
+        PersonName,
+      </if>
+      <if test="confirmationtime != null" >
+        ConfirmationTime,
+      </if>
+      <if test="confirmationunit != null" >
+        ConfirmationUnit,
+      </if>
+      <if test="confirmationpersonname != null" >
+        ConfirmationPersonName,
+      </if>
+      <if test="treatmentstate != null" >
+        TreatmentState,
+      </if>
+      <if test="apreturnstatus != null" >
+        ApReturnStatus,
+      </if>
+      <if test="identificationsign != null" >
+        IdentificationSign,
+      </if>
+      <if test="handlingopinions != null" >
+        HandlingOpinions,
+      </if>
+      <if test="denialtype != null" >
+        DenialType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applicationno != null" >
+        #{applicationno,jdbcType=VARCHAR},
+      </if>
+      <if test="worksheetno != null" >
+        #{worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="returntype != null" >
+        #{returntype,jdbcType=BIT},
+      </if>
+      <if test="apremark != null" >
+        #{apremark,jdbcType=VARCHAR},
+      </if>
+      <if test="aploss != null" >
+        #{aploss,jdbcType=INTEGER},
+      </if>
+      <if test="entrytime != null" >
+        #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivegunit != null" >
+        #{receivegunit,jdbcType=INTEGER},
+      </if>
+      <if test="invalidatesign != null" >
+        #{invalidatesign,jdbcType=BIT},
+      </if>
+      <if test="returnunit != null" >
+        #{returnunit,jdbcType=INTEGER},
+      </if>
+      <if test="recordingtime != null" >
+        #{recordingtime,jdbcType=DATE},
+      </if>
+      <if test="entryunit != null" >
+        #{entryunit,jdbcType=INTEGER},
+      </if>
+      <if test="personname != null" >
+        #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmationtime != null" >
+        #{confirmationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmationunit != null" >
+        #{confirmationunit,jdbcType=INTEGER},
+      </if>
+      <if test="confirmationpersonname != null" >
+        #{confirmationpersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentstate != null" >
+        #{treatmentstate,jdbcType=BIT},
+      </if>
+      <if test="apreturnstatus != null" >
+        #{apreturnstatus,jdbcType=BIT},
+      </if>
+      <if test="identificationsign != null" >
+        #{identificationsign,jdbcType=BIT},
+      </if>
+      <if test="handlingopinions != null" >
+        #{handlingopinions,jdbcType=VARCHAR},
+      </if>
+      <if test="denialtype != null" >
+        #{denialtype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.RetReturnlistExample" resultType="java.lang.Integer" >
+    select count(*) from ret_returnlist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ret_returnlist
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicationno != null" >
+        ApplicationNo = #{record.applicationno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.worksheetno != null" >
+        WorkSheetNo = #{record.worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returntype != null" >
+        ReturnType = #{record.returntype,jdbcType=BIT},
+      </if>
+      <if test="record.apremark != null" >
+        ApRemark = #{record.apremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aploss != null" >
+        ApLoss = #{record.aploss,jdbcType=INTEGER},
+      </if>
+      <if test="record.entrytime != null" >
+        EntryTime = #{record.entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.receivegunit != null" >
+        ReceivegUnit = #{record.receivegunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.invalidatesign != null" >
+        InvalidateSign = #{record.invalidatesign,jdbcType=BIT},
+      </if>
+      <if test="record.returnunit != null" >
+        ReturnUnit = #{record.returnunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.recordingtime != null" >
+        RecordingTime = #{record.recordingtime,jdbcType=DATE},
+      </if>
+      <if test="record.entryunit != null" >
+        EntryUnit = #{record.entryunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.personname != null" >
+        PersonName = #{record.personname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmationtime != null" >
+        ConfirmationTime = #{record.confirmationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.confirmationunit != null" >
+        ConfirmationUnit = #{record.confirmationunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.confirmationpersonname != null" >
+        ConfirmationPersonName = #{record.confirmationpersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treatmentstate != null" >
+        TreatmentState = #{record.treatmentstate,jdbcType=BIT},
+      </if>
+      <if test="record.apreturnstatus != null" >
+        ApReturnStatus = #{record.apreturnstatus,jdbcType=BIT},
+      </if>
+      <if test="record.identificationsign != null" >
+        IdentificationSign = #{record.identificationsign,jdbcType=BIT},
+      </if>
+      <if test="record.handlingopinions != null" >
+        HandlingOpinions = #{record.handlingopinions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.denialtype != null" >
+        DenialType = #{record.denialtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ret_returnlist
+    set ID = #{record.id,jdbcType=INTEGER},
+      ApplicationNo = #{record.applicationno,jdbcType=VARCHAR},
+      WorkSheetNo = #{record.worksheetno,jdbcType=VARCHAR},
+      ReturnType = #{record.returntype,jdbcType=BIT},
+      ApRemark = #{record.apremark,jdbcType=VARCHAR},
+      ApLoss = #{record.aploss,jdbcType=INTEGER},
+      EntryTime = #{record.entrytime,jdbcType=TIMESTAMP},
+      ReceivegUnit = #{record.receivegunit,jdbcType=INTEGER},
+      InvalidateSign = #{record.invalidatesign,jdbcType=BIT},
+      ReturnUnit = #{record.returnunit,jdbcType=INTEGER},
+      RecordingTime = #{record.recordingtime,jdbcType=DATE},
+      EntryUnit = #{record.entryunit,jdbcType=INTEGER},
+      PersonName = #{record.personname,jdbcType=VARCHAR},
+      ConfirmationTime = #{record.confirmationtime,jdbcType=TIMESTAMP},
+      ConfirmationUnit = #{record.confirmationunit,jdbcType=INTEGER},
+      ConfirmationPersonName = #{record.confirmationpersonname,jdbcType=VARCHAR},
+      TreatmentState = #{record.treatmentstate,jdbcType=BIT},
+      ApReturnStatus = #{record.apreturnstatus,jdbcType=BIT},
+      IdentificationSign = #{record.identificationsign,jdbcType=BIT},
+      HandlingOpinions = #{record.handlingopinions,jdbcType=VARCHAR},
+      DenialType = #{record.denialtype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.RetReturnlist" >
+    update ret_returnlist
+    <set >
+      <if test="worksheetno != null" >
+        WorkSheetNo = #{worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="returntype != null" >
+        ReturnType = #{returntype,jdbcType=BIT},
+      </if>
+      <if test="apremark != null" >
+        ApRemark = #{apremark,jdbcType=VARCHAR},
+      </if>
+      <if test="aploss != null" >
+        ApLoss = #{aploss,jdbcType=INTEGER},
+      </if>
+      <if test="entrytime != null" >
+        EntryTime = #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivegunit != null" >
+        ReceivegUnit = #{receivegunit,jdbcType=INTEGER},
+      </if>
+      <if test="invalidatesign != null" >
+        InvalidateSign = #{invalidatesign,jdbcType=BIT},
+      </if>
+      <if test="returnunit != null" >
+        ReturnUnit = #{returnunit,jdbcType=INTEGER},
+      </if>
+      <if test="recordingtime != null" >
+        RecordingTime = #{recordingtime,jdbcType=DATE},
+      </if>
+      <if test="entryunit != null" >
+        EntryUnit = #{entryunit,jdbcType=INTEGER},
+      </if>
+      <if test="personname != null" >
+        PersonName = #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmationtime != null" >
+        ConfirmationTime = #{confirmationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmationunit != null" >
+        ConfirmationUnit = #{confirmationunit,jdbcType=INTEGER},
+      </if>
+      <if test="confirmationpersonname != null" >
+        ConfirmationPersonName = #{confirmationpersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentstate != null" >
+        TreatmentState = #{treatmentstate,jdbcType=BIT},
+      </if>
+      <if test="apreturnstatus != null" >
+        ApReturnStatus = #{apreturnstatus,jdbcType=BIT},
+      </if>
+      <if test="identificationsign != null" >
+        IdentificationSign = #{identificationsign,jdbcType=BIT},
+      </if>
+      <if test="handlingopinions != null" >
+        HandlingOpinions = #{handlingopinions,jdbcType=VARCHAR},
+      </if>
+      <if test="denialtype != null" >
+        DenialType = #{denialtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+      and ApplicationNo = #{applicationno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.RetReturnlist" >
+    update ret_returnlist
+    set WorkSheetNo = #{worksheetno,jdbcType=VARCHAR},
+      ReturnType = #{returntype,jdbcType=BIT},
+      ApRemark = #{apremark,jdbcType=VARCHAR},
+      ApLoss = #{aploss,jdbcType=INTEGER},
+      EntryTime = #{entrytime,jdbcType=TIMESTAMP},
+      ReceivegUnit = #{receivegunit,jdbcType=INTEGER},
+      InvalidateSign = #{invalidatesign,jdbcType=BIT},
+      ReturnUnit = #{returnunit,jdbcType=INTEGER},
+      RecordingTime = #{recordingtime,jdbcType=DATE},
+      EntryUnit = #{entryunit,jdbcType=INTEGER},
+      PersonName = #{personname,jdbcType=VARCHAR},
+      ConfirmationTime = #{confirmationtime,jdbcType=TIMESTAMP},
+      ConfirmationUnit = #{confirmationunit,jdbcType=INTEGER},
+      ConfirmationPersonName = #{confirmationpersonname,jdbcType=VARCHAR},
+      TreatmentState = #{treatmentstate,jdbcType=BIT},
+      ApReturnStatus = #{apreturnstatus,jdbcType=BIT},
+      IdentificationSign = #{identificationsign,jdbcType=BIT},
+      HandlingOpinions = #{handlingopinions,jdbcType=VARCHAR},
+      DenialType = #{denialtype,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+      and ApplicationNo = #{applicationno,jdbcType=VARCHAR}
+  </update>
+</mapper>

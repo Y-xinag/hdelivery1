@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.PacStockMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.PacStock" >
+    <id column="WarehouseNo" property="warehouseno" jdbcType="VARCHAR" />
+    <result column="ReservoirType" property="reservoirtype" jdbcType="BIT" />
+    <result column="Transport" property="transport" jdbcType="VARCHAR" />
+    <result column="SubordinateUnit" property="subordinateunit" jdbcType="VARCHAR" />
+    <result column="DrawerNo" property="drawerno" jdbcType="INTEGER" />
+    <result column="DrawerName" property="drawername" jdbcType="VARCHAR" />
+    <result column="DrawerTime" property="drawertime" jdbcType="TIMESTAMP" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WarehouseNo, ReservoirType, Transport, SubordinateUnit, DrawerNo, DrawerName, DrawerTime, 
+    Remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.PacStockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pac_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pac_stock
+    where WarehouseNo = #{warehouseno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pac_stock
+    where WarehouseNo = #{warehouseno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.PacStockExample" >
+    delete from pac_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.PacStock" >
+    insert into pac_stock (WarehouseNo, ReservoirType, Transport, 
+      SubordinateUnit, DrawerNo, DrawerName, 
+      DrawerTime, Remark)
+    values (#{warehouseno,jdbcType=VARCHAR}, #{reservoirtype,jdbcType=BIT}, #{transport,jdbcType=VARCHAR}, 
+      #{subordinateunit,jdbcType=VARCHAR}, #{drawerno,jdbcType=INTEGER}, #{drawername,jdbcType=VARCHAR}, 
+      #{drawertime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.PacStock" >
+    insert into pac_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="warehouseno != null" >
+        WarehouseNo,
+      </if>
+      <if test="reservoirtype != null" >
+        ReservoirType,
+      </if>
+      <if test="transport != null" >
+        Transport,
+      </if>
+      <if test="subordinateunit != null" >
+        SubordinateUnit,
+      </if>
+      <if test="drawerno != null" >
+        DrawerNo,
+      </if>
+      <if test="drawername != null" >
+        DrawerName,
+      </if>
+      <if test="drawertime != null" >
+        DrawerTime,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="warehouseno != null" >
+        #{warehouseno,jdbcType=VARCHAR},
+      </if>
+      <if test="reservoirtype != null" >
+        #{reservoirtype,jdbcType=BIT},
+      </if>
+      <if test="transport != null" >
+        #{transport,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateunit != null" >
+        #{subordinateunit,jdbcType=VARCHAR},
+      </if>
+      <if test="drawerno != null" >
+        #{drawerno,jdbcType=INTEGER},
+      </if>
+      <if test="drawername != null" >
+        #{drawername,jdbcType=VARCHAR},
+      </if>
+      <if test="drawertime != null" >
+        #{drawertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.PacStockExample" resultType="java.lang.Integer" >
+    select count(*) from pac_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pac_stock
+    <set >
+      <if test="record.warehouseno != null" >
+        WarehouseNo = #{record.warehouseno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservoirtype != null" >
+        ReservoirType = #{record.reservoirtype,jdbcType=BIT},
+      </if>
+      <if test="record.transport != null" >
+        Transport = #{record.transport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subordinateunit != null" >
+        SubordinateUnit = #{record.subordinateunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drawerno != null" >
+        DrawerNo = #{record.drawerno,jdbcType=INTEGER},
+      </if>
+      <if test="record.drawername != null" >
+        DrawerName = #{record.drawername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drawertime != null" >
+        DrawerTime = #{record.drawertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pac_stock
+    set WarehouseNo = #{record.warehouseno,jdbcType=VARCHAR},
+      ReservoirType = #{record.reservoirtype,jdbcType=BIT},
+      Transport = #{record.transport,jdbcType=VARCHAR},
+      SubordinateUnit = #{record.subordinateunit,jdbcType=VARCHAR},
+      DrawerNo = #{record.drawerno,jdbcType=INTEGER},
+      DrawerName = #{record.drawername,jdbcType=VARCHAR},
+      DrawerTime = #{record.drawertime,jdbcType=TIMESTAMP},
+      Remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.PacStock" >
+    update pac_stock
+    <set >
+      <if test="reservoirtype != null" >
+        ReservoirType = #{reservoirtype,jdbcType=BIT},
+      </if>
+      <if test="transport != null" >
+        Transport = #{transport,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateunit != null" >
+        SubordinateUnit = #{subordinateunit,jdbcType=VARCHAR},
+      </if>
+      <if test="drawerno != null" >
+        DrawerNo = #{drawerno,jdbcType=INTEGER},
+      </if>
+      <if test="drawername != null" >
+        DrawerName = #{drawername,jdbcType=VARCHAR},
+      </if>
+      <if test="drawertime != null" >
+        DrawerTime = #{drawertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WarehouseNo = #{warehouseno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.PacStock" >
+    update pac_stock
+    set ReservoirType = #{reservoirtype,jdbcType=BIT},
+      Transport = #{transport,jdbcType=VARCHAR},
+      SubordinateUnit = #{subordinateunit,jdbcType=VARCHAR},
+      DrawerNo = #{drawerno,jdbcType=INTEGER},
+      DrawerName = #{drawername,jdbcType=VARCHAR},
+      DrawerTime = #{drawertime,jdbcType=TIMESTAMP},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where WarehouseNo = #{warehouseno,jdbcType=VARCHAR}
+  </update>
+</mapper>

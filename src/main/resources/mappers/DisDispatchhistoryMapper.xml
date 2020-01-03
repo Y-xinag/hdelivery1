@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.DisDispatchhistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.DisDispatchhistory" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="DispatchSequence" property="dispatchsequence" jdbcType="INTEGER" />
+    <result column="TransferredUnit" property="transferredunit" jdbcType="INTEGER" />
+    <result column="OperatorID" property="operatorid" jdbcType="INTEGER" />
+    <result column="OperationUnitID" property="operationunitid" jdbcType="INTEGER" />
+    <result column="OperationTime" property="operationtime" jdbcType="TIMESTAMP" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="BIT" />
+    <result column="Reason" property="reason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, DispatchSequence, TransferredUnit, OperatorID, OperationUnitID, OperationTime, 
+    Remark, Status, Reason
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.DisDispatchhistoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dis_dispatchhistory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dis_dispatchhistory
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dis_dispatchhistory
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.DisDispatchhistoryExample" >
+    delete from dis_dispatchhistory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.DisDispatchhistory" >
+    insert into dis_dispatchhistory (ID, DispatchSequence, TransferredUnit, 
+      OperatorID, OperationUnitID, OperationTime, 
+      Remark, Status, Reason)
+    values (#{id,jdbcType=INTEGER}, #{dispatchsequence,jdbcType=INTEGER}, #{transferredunit,jdbcType=INTEGER}, 
+      #{operatorid,jdbcType=INTEGER}, #{operationunitid,jdbcType=INTEGER}, #{operationtime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{reason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.DisDispatchhistory" >
+    insert into dis_dispatchhistory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="dispatchsequence != null" >
+        DispatchSequence,
+      </if>
+      <if test="transferredunit != null" >
+        TransferredUnit,
+      </if>
+      <if test="operatorid != null" >
+        OperatorID,
+      </if>
+      <if test="operationunitid != null" >
+        OperationUnitID,
+      </if>
+      <if test="operationtime != null" >
+        OperationTime,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="reason != null" >
+        Reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchsequence != null" >
+        #{dispatchsequence,jdbcType=INTEGER},
+      </if>
+      <if test="transferredunit != null" >
+        #{transferredunit,jdbcType=INTEGER},
+      </if>
+      <if test="operatorid != null" >
+        #{operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="operationunitid != null" >
+        #{operationunitid,jdbcType=INTEGER},
+      </if>
+      <if test="operationtime != null" >
+        #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.DisDispatchhistoryExample" resultType="java.lang.Integer" >
+    select count(*) from dis_dispatchhistory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dis_dispatchhistory
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dispatchsequence != null" >
+        DispatchSequence = #{record.dispatchsequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.transferredunit != null" >
+        TransferredUnit = #{record.transferredunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.operatorid != null" >
+        OperatorID = #{record.operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationunitid != null" >
+        OperationUnitID = #{record.operationunitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationtime != null" >
+        OperationTime = #{record.operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.reason != null" >
+        Reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dis_dispatchhistory
+    set ID = #{record.id,jdbcType=INTEGER},
+      DispatchSequence = #{record.dispatchsequence,jdbcType=INTEGER},
+      TransferredUnit = #{record.transferredunit,jdbcType=INTEGER},
+      OperatorID = #{record.operatorid,jdbcType=INTEGER},
+      OperationUnitID = #{record.operationunitid,jdbcType=INTEGER},
+      OperationTime = #{record.operationtime,jdbcType=TIMESTAMP},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=BIT},
+      Reason = #{record.reason,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.DisDispatchhistory" >
+    update dis_dispatchhistory
+    <set >
+      <if test="dispatchsequence != null" >
+        DispatchSequence = #{dispatchsequence,jdbcType=INTEGER},
+      </if>
+      <if test="transferredunit != null" >
+        TransferredUnit = #{transferredunit,jdbcType=INTEGER},
+      </if>
+      <if test="operatorid != null" >
+        OperatorID = #{operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="operationunitid != null" >
+        OperationUnitID = #{operationunitid,jdbcType=INTEGER},
+      </if>
+      <if test="operationtime != null" >
+        OperationTime = #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=BIT},
+      </if>
+      <if test="reason != null" >
+        Reason = #{reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.DisDispatchhistory" >
+    update dis_dispatchhistory
+    set DispatchSequence = #{dispatchsequence,jdbcType=INTEGER},
+      TransferredUnit = #{transferredunit,jdbcType=INTEGER},
+      OperatorID = #{operatorid,jdbcType=INTEGER},
+      OperationUnitID = #{operationunitid,jdbcType=INTEGER},
+      OperationTime = #{operationtime,jdbcType=TIMESTAMP},
+      Remark = #{remark,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=BIT},
+      Reason = #{reason,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

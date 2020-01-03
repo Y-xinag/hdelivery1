@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.LogLogisticstransferMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.LogLogisticstransfer" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TransferInt" property="transferint" jdbcType="VARCHAR" />
+    <result column="StartStation" property="startstation" jdbcType="VARCHAR" />
+    <result column="EndStation" property="endstation" jdbcType="VARCHAR" />
+    <result column="Dispatcher" property="dispatcher" jdbcType="VARCHAR" />
+    <result column="Driver" property="driver" jdbcType="VARCHAR" />
+    <result column="DeliveryPerson" property="deliveryperson" jdbcType="INTEGER" />
+    <result column="DeliveryDate" property="deliverydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TransferInt, StartStation, EndStation, Dispatcher, Driver, DeliveryPerson, DeliveryDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.LogLogisticstransferExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log_logisticstransfer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log_logisticstransfer
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log_logisticstransfer
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.LogLogisticstransferExample" >
+    delete from log_logisticstransfer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.LogLogisticstransfer" >
+    insert into log_logisticstransfer (ID, TransferInt, StartStation, 
+      EndStation, Dispatcher, Driver, 
+      DeliveryPerson, DeliveryDate)
+    values (#{id,jdbcType=INTEGER}, #{transferint,jdbcType=VARCHAR}, #{startstation,jdbcType=VARCHAR}, 
+      #{endstation,jdbcType=VARCHAR}, #{dispatcher,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR}, 
+      #{deliveryperson,jdbcType=INTEGER}, #{deliverydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.LogLogisticstransfer" >
+    insert into log_logisticstransfer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="transferint != null" >
+        TransferInt,
+      </if>
+      <if test="startstation != null" >
+        StartStation,
+      </if>
+      <if test="endstation != null" >
+        EndStation,
+      </if>
+      <if test="dispatcher != null" >
+        Dispatcher,
+      </if>
+      <if test="driver != null" >
+        Driver,
+      </if>
+      <if test="deliveryperson != null" >
+        DeliveryPerson,
+      </if>
+      <if test="deliverydate != null" >
+        DeliveryDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="transferint != null" >
+        #{transferint,jdbcType=VARCHAR},
+      </if>
+      <if test="startstation != null" >
+        #{startstation,jdbcType=VARCHAR},
+      </if>
+      <if test="endstation != null" >
+        #{endstation,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatcher != null" >
+        #{dispatcher,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null" >
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryperson != null" >
+        #{deliveryperson,jdbcType=INTEGER},
+      </if>
+      <if test="deliverydate != null" >
+        #{deliverydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.LogLogisticstransferExample" resultType="java.lang.Integer" >
+    select count(*) from log_logisticstransfer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update log_logisticstransfer
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.transferint != null" >
+        TransferInt = #{record.transferint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startstation != null" >
+        StartStation = #{record.startstation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endstation != null" >
+        EndStation = #{record.endstation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispatcher != null" >
+        Dispatcher = #{record.dispatcher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driver != null" >
+        Driver = #{record.driver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryperson != null" >
+        DeliveryPerson = #{record.deliveryperson,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliverydate != null" >
+        DeliveryDate = #{record.deliverydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update log_logisticstransfer
+    set ID = #{record.id,jdbcType=INTEGER},
+      TransferInt = #{record.transferint,jdbcType=VARCHAR},
+      StartStation = #{record.startstation,jdbcType=VARCHAR},
+      EndStation = #{record.endstation,jdbcType=VARCHAR},
+      Dispatcher = #{record.dispatcher,jdbcType=VARCHAR},
+      Driver = #{record.driver,jdbcType=VARCHAR},
+      DeliveryPerson = #{record.deliveryperson,jdbcType=INTEGER},
+      DeliveryDate = #{record.deliverydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.LogLogisticstransfer" >
+    update log_logisticstransfer
+    <set >
+      <if test="transferint != null" >
+        TransferInt = #{transferint,jdbcType=VARCHAR},
+      </if>
+      <if test="startstation != null" >
+        StartStation = #{startstation,jdbcType=VARCHAR},
+      </if>
+      <if test="endstation != null" >
+        EndStation = #{endstation,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatcher != null" >
+        Dispatcher = #{dispatcher,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null" >
+        Driver = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryperson != null" >
+        DeliveryPerson = #{deliveryperson,jdbcType=INTEGER},
+      </if>
+      <if test="deliverydate != null" >
+        DeliveryDate = #{deliverydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.LogLogisticstransfer" >
+    update log_logisticstransfer
+    set TransferInt = #{transferint,jdbcType=VARCHAR},
+      StartStation = #{startstation,jdbcType=VARCHAR},
+      EndStation = #{endstation,jdbcType=VARCHAR},
+      Dispatcher = #{dispatcher,jdbcType=VARCHAR},
+      Driver = #{driver,jdbcType=VARCHAR},
+      DeliveryPerson = #{deliveryperson,jdbcType=INTEGER},
+      DeliveryDate = #{deliverydate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

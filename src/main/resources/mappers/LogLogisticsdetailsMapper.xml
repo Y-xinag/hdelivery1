@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.LogLogisticsdetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.LogLogisticsdetails" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="LogisticsInt" property="logisticsint" jdbcType="VARCHAR" />
+    <result column="CompanyName" property="companyname" jdbcType="VARCHAR" />
+    <result column="ExpectArrivalDate" property="expectarrivaldate" jdbcType="TIMESTAMP" />
+    <result column="ActualArrivalDate" property="actualarrivaldate" jdbcType="TIMESTAMP" />
+    <result column="ExpectDepartureDate" property="expectdeparturedate" jdbcType="TIMESTAMP" />
+    <result column="ActualDepartureDate" property="actualdeparturedate" jdbcType="TIMESTAMP" />
+    <result column="OperationPerson" property="operationperson" jdbcType="VARCHAR" />
+    <result column="LogisticsType" property="logisticstype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, LogisticsInt, CompanyName, ExpectArrivalDate, ActualArrivalDate, ExpectDepartureDate, 
+    ActualDepartureDate, OperationPerson, LogisticsType
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.LogLogisticsdetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log_logisticsdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log_logisticsdetails
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log_logisticsdetails
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.LogLogisticsdetailsExample" >
+    delete from log_logisticsdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.LogLogisticsdetails" >
+    insert into log_logisticsdetails (ID, LogisticsInt, CompanyName, 
+      ExpectArrivalDate, ActualArrivalDate, 
+      ExpectDepartureDate, ActualDepartureDate, 
+      OperationPerson, LogisticsType)
+    values (#{id,jdbcType=INTEGER}, #{logisticsint,jdbcType=VARCHAR}, #{companyname,jdbcType=VARCHAR}, 
+      #{expectarrivaldate,jdbcType=TIMESTAMP}, #{actualarrivaldate,jdbcType=TIMESTAMP}, 
+      #{expectdeparturedate,jdbcType=TIMESTAMP}, #{actualdeparturedate,jdbcType=TIMESTAMP}, 
+      #{operationperson,jdbcType=VARCHAR}, #{logisticstype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.LogLogisticsdetails" >
+    insert into log_logisticsdetails
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="logisticsint != null" >
+        LogisticsInt,
+      </if>
+      <if test="companyname != null" >
+        CompanyName,
+      </if>
+      <if test="expectarrivaldate != null" >
+        ExpectArrivalDate,
+      </if>
+      <if test="actualarrivaldate != null" >
+        ActualArrivalDate,
+      </if>
+      <if test="expectdeparturedate != null" >
+        ExpectDepartureDate,
+      </if>
+      <if test="actualdeparturedate != null" >
+        ActualDepartureDate,
+      </if>
+      <if test="operationperson != null" >
+        OperationPerson,
+      </if>
+      <if test="logisticstype != null" >
+        LogisticsType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsint != null" >
+        #{logisticsint,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="expectarrivaldate != null" >
+        #{expectarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualarrivaldate != null" >
+        #{actualarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectdeparturedate != null" >
+        #{expectdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualdeparturedate != null" >
+        #{actualdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationperson != null" >
+        #{operationperson,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticstype != null" >
+        #{logisticstype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.LogLogisticsdetailsExample" resultType="java.lang.Integer" >
+    select count(*) from log_logisticsdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update log_logisticsdetails
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.logisticsint != null" >
+        LogisticsInt = #{record.logisticsint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyname != null" >
+        CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectarrivaldate != null" >
+        ExpectArrivalDate = #{record.expectarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actualarrivaldate != null" >
+        ActualArrivalDate = #{record.actualarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expectdeparturedate != null" >
+        ExpectDepartureDate = #{record.expectdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actualdeparturedate != null" >
+        ActualDepartureDate = #{record.actualdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operationperson != null" >
+        OperationPerson = #{record.operationperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticstype != null" >
+        LogisticsType = #{record.logisticstype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update log_logisticsdetails
+    set ID = #{record.id,jdbcType=INTEGER},
+      LogisticsInt = #{record.logisticsint,jdbcType=VARCHAR},
+      CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      ExpectArrivalDate = #{record.expectarrivaldate,jdbcType=TIMESTAMP},
+      ActualArrivalDate = #{record.actualarrivaldate,jdbcType=TIMESTAMP},
+      ExpectDepartureDate = #{record.expectdeparturedate,jdbcType=TIMESTAMP},
+      ActualDepartureDate = #{record.actualdeparturedate,jdbcType=TIMESTAMP},
+      OperationPerson = #{record.operationperson,jdbcType=VARCHAR},
+      LogisticsType = #{record.logisticstype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.LogLogisticsdetails" >
+    update log_logisticsdetails
+    <set >
+      <if test="logisticsint != null" >
+        LogisticsInt = #{logisticsint,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        CompanyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="expectarrivaldate != null" >
+        ExpectArrivalDate = #{expectarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualarrivaldate != null" >
+        ActualArrivalDate = #{actualarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectdeparturedate != null" >
+        ExpectDepartureDate = #{expectdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualdeparturedate != null" >
+        ActualDepartureDate = #{actualdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationperson != null" >
+        OperationPerson = #{operationperson,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticstype != null" >
+        LogisticsType = #{logisticstype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.LogLogisticsdetails" >
+    update log_logisticsdetails
+    set LogisticsInt = #{logisticsint,jdbcType=VARCHAR},
+      CompanyName = #{companyname,jdbcType=VARCHAR},
+      ExpectArrivalDate = #{expectarrivaldate,jdbcType=TIMESTAMP},
+      ActualArrivalDate = #{actualarrivaldate,jdbcType=TIMESTAMP},
+      ExpectDepartureDate = #{expectdeparturedate,jdbcType=TIMESTAMP},
+      ActualDepartureDate = #{actualdeparturedate,jdbcType=TIMESTAMP},
+      OperationPerson = #{operationperson,jdbcType=VARCHAR},
+      LogisticsType = #{logisticstype,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.LogTrackMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.LogTrack" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="LineType" property="linetype" jdbcType="VARCHAR" />
+    <result column="LineName" property="linename" jdbcType="VARCHAR" />
+    <result column="LogisticsCar" property="logisticscar" jdbcType="VARCHAR" />
+    <result column="LineState" property="linestate" jdbcType="BIT" />
+    <result column="NodeName" property="nodename" jdbcType="VARCHAR" />
+    <result column="StartTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="ArrivalTime" property="arrivaltime" jdbcType="TIMESTAMP" />
+    <result column="CarInt" property="carint" jdbcType="VARCHAR" />
+    <result column="NextNodeLoad" property="nextnodeload" jdbcType="VARCHAR" />
+    <result column="Describes" property="describes" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, LineType, LineName, LogisticsCar, LineState, NodeName, StartTime, ArrivalTime, 
+    CarInt, NextNodeLoad, Describes
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.LogTrackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log_track
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log_track
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log_track
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.LogTrackExample" >
+    delete from log_track
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.LogTrack" >
+    insert into log_track (ID, LineType, LineName, 
+      LogisticsCar, LineState, NodeName, 
+      StartTime, ArrivalTime, CarInt, 
+      NextNodeLoad, Describes)
+    values (#{id,jdbcType=INTEGER}, #{linetype,jdbcType=VARCHAR}, #{linename,jdbcType=VARCHAR}, 
+      #{logisticscar,jdbcType=VARCHAR}, #{linestate,jdbcType=BIT}, #{nodename,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{arrivaltime,jdbcType=TIMESTAMP}, #{carint,jdbcType=VARCHAR}, 
+      #{nextnodeload,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.LogTrack" >
+    insert into log_track
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="linetype != null" >
+        LineType,
+      </if>
+      <if test="linename != null" >
+        LineName,
+      </if>
+      <if test="logisticscar != null" >
+        LogisticsCar,
+      </if>
+      <if test="linestate != null" >
+        LineState,
+      </if>
+      <if test="nodename != null" >
+        NodeName,
+      </if>
+      <if test="starttime != null" >
+        StartTime,
+      </if>
+      <if test="arrivaltime != null" >
+        ArrivalTime,
+      </if>
+      <if test="carint != null" >
+        CarInt,
+      </if>
+      <if test="nextnodeload != null" >
+        NextNodeLoad,
+      </if>
+      <if test="describes != null" >
+        Describes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="linetype != null" >
+        #{linetype,jdbcType=VARCHAR},
+      </if>
+      <if test="linename != null" >
+        #{linename,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticscar != null" >
+        #{logisticscar,jdbcType=VARCHAR},
+      </if>
+      <if test="linestate != null" >
+        #{linestate,jdbcType=BIT},
+      </if>
+      <if test="nodename != null" >
+        #{nodename,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivaltime != null" >
+        #{arrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carint != null" >
+        #{carint,jdbcType=VARCHAR},
+      </if>
+      <if test="nextnodeload != null" >
+        #{nextnodeload,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null" >
+        #{describes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.LogTrackExample" resultType="java.lang.Integer" >
+    select count(*) from log_track
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update log_track
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.linetype != null" >
+        LineType = #{record.linetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linename != null" >
+        LineName = #{record.linename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticscar != null" >
+        LogisticsCar = #{record.logisticscar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linestate != null" >
+        LineState = #{record.linestate,jdbcType=BIT},
+      </if>
+      <if test="record.nodename != null" >
+        NodeName = #{record.nodename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        StartTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.arrivaltime != null" >
+        ArrivalTime = #{record.arrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.carint != null" >
+        CarInt = #{record.carint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextnodeload != null" >
+        NextNodeLoad = #{record.nextnodeload,jdbcType=VARCHAR},
+      </if>
+      <if test="record.describes != null" >
+        Describes = #{record.describes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update log_track
+    set ID = #{record.id,jdbcType=INTEGER},
+      LineType = #{record.linetype,jdbcType=VARCHAR},
+      LineName = #{record.linename,jdbcType=VARCHAR},
+      LogisticsCar = #{record.logisticscar,jdbcType=VARCHAR},
+      LineState = #{record.linestate,jdbcType=BIT},
+      NodeName = #{record.nodename,jdbcType=VARCHAR},
+      StartTime = #{record.starttime,jdbcType=TIMESTAMP},
+      ArrivalTime = #{record.arrivaltime,jdbcType=TIMESTAMP},
+      CarInt = #{record.carint,jdbcType=VARCHAR},
+      NextNodeLoad = #{record.nextnodeload,jdbcType=VARCHAR},
+      Describes = #{record.describes,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.LogTrack" >
+    update log_track
+    <set >
+      <if test="linetype != null" >
+        LineType = #{linetype,jdbcType=VARCHAR},
+      </if>
+      <if test="linename != null" >
+        LineName = #{linename,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticscar != null" >
+        LogisticsCar = #{logisticscar,jdbcType=VARCHAR},
+      </if>
+      <if test="linestate != null" >
+        LineState = #{linestate,jdbcType=BIT},
+      </if>
+      <if test="nodename != null" >
+        NodeName = #{nodename,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        StartTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivaltime != null" >
+        ArrivalTime = #{arrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carint != null" >
+        CarInt = #{carint,jdbcType=VARCHAR},
+      </if>
+      <if test="nextnodeload != null" >
+        NextNodeLoad = #{nextnodeload,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null" >
+        Describes = #{describes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.LogTrack" >
+    update log_track
+    set LineType = #{linetype,jdbcType=VARCHAR},
+      LineName = #{linename,jdbcType=VARCHAR},
+      LogisticsCar = #{logisticscar,jdbcType=VARCHAR},
+      LineState = #{linestate,jdbcType=BIT},
+      NodeName = #{nodename,jdbcType=VARCHAR},
+      StartTime = #{starttime,jdbcType=TIMESTAMP},
+      ArrivalTime = #{arrivaltime,jdbcType=TIMESTAMP},
+      CarInt = #{carint,jdbcType=VARCHAR},
+      NextNodeLoad = #{nextnodeload,jdbcType=VARCHAR},
+      Describes = #{describes,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

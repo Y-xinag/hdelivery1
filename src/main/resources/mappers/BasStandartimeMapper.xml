@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.BasStandartimeMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.BasStandartime" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TimeName" property="timename" jdbcType="VARCHAR" />
+    <result column="SubordinateUnit" property="subordinateunit" jdbcType="INTEGER" />
+    <result column="WorkingTime" property="workingtime" jdbcType="DATE" />
+    <result column="ClosingTime" property="closingtime" jdbcType="DATE" />
+    <result column="SaturdayWorkingTime" property="saturdayworkingtime" jdbcType="DATE" />
+    <result column="SaturdayClosingTime" property="saturdayclosingtime" jdbcType="DATE" />
+    <result column="SundayWorkingTime" property="sundayworkingtime" jdbcType="DATE" />
+    <result column="SundayClosingTime" property="sundayclosingtime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TimeName, SubordinateUnit, WorkingTime, ClosingTime, SaturdayWorkingTime, SaturdayClosingTime, 
+    SundayWorkingTime, SundayClosingTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.BasStandartimeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bas_standartime
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_standartime
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bas_standartime
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.BasStandartimeExample" >
+    delete from bas_standartime
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.BasStandartime" >
+    insert into bas_standartime (ID, TimeName, SubordinateUnit, 
+      WorkingTime, ClosingTime, SaturdayWorkingTime, 
+      SaturdayClosingTime, SundayWorkingTime, SundayClosingTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{timename,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=INTEGER}, 
+      #{workingtime,jdbcType=DATE}, #{closingtime,jdbcType=DATE}, #{saturdayworkingtime,jdbcType=DATE}, 
+      #{saturdayclosingtime,jdbcType=DATE}, #{sundayworkingtime,jdbcType=DATE}, #{sundayclosingtime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.BasStandartime" >
+    insert into bas_standartime
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="timename != null" >
+        TimeName,
+      </if>
+      <if test="subordinateunit != null" >
+        SubordinateUnit,
+      </if>
+      <if test="workingtime != null" >
+        WorkingTime,
+      </if>
+      <if test="closingtime != null" >
+        ClosingTime,
+      </if>
+      <if test="saturdayworkingtime != null" >
+        SaturdayWorkingTime,
+      </if>
+      <if test="saturdayclosingtime != null" >
+        SaturdayClosingTime,
+      </if>
+      <if test="sundayworkingtime != null" >
+        SundayWorkingTime,
+      </if>
+      <if test="sundayclosingtime != null" >
+        SundayClosingTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="timename != null" >
+        #{timename,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateunit != null" >
+        #{subordinateunit,jdbcType=INTEGER},
+      </if>
+      <if test="workingtime != null" >
+        #{workingtime,jdbcType=DATE},
+      </if>
+      <if test="closingtime != null" >
+        #{closingtime,jdbcType=DATE},
+      </if>
+      <if test="saturdayworkingtime != null" >
+        #{saturdayworkingtime,jdbcType=DATE},
+      </if>
+      <if test="saturdayclosingtime != null" >
+        #{saturdayclosingtime,jdbcType=DATE},
+      </if>
+      <if test="sundayworkingtime != null" >
+        #{sundayworkingtime,jdbcType=DATE},
+      </if>
+      <if test="sundayclosingtime != null" >
+        #{sundayclosingtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.BasStandartimeExample" resultType="java.lang.Integer" >
+    select count(*) from bas_standartime
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bas_standartime
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.timename != null" >
+        TimeName = #{record.timename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subordinateunit != null" >
+        SubordinateUnit = #{record.subordinateunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.workingtime != null" >
+        WorkingTime = #{record.workingtime,jdbcType=DATE},
+      </if>
+      <if test="record.closingtime != null" >
+        ClosingTime = #{record.closingtime,jdbcType=DATE},
+      </if>
+      <if test="record.saturdayworkingtime != null" >
+        SaturdayWorkingTime = #{record.saturdayworkingtime,jdbcType=DATE},
+      </if>
+      <if test="record.saturdayclosingtime != null" >
+        SaturdayClosingTime = #{record.saturdayclosingtime,jdbcType=DATE},
+      </if>
+      <if test="record.sundayworkingtime != null" >
+        SundayWorkingTime = #{record.sundayworkingtime,jdbcType=DATE},
+      </if>
+      <if test="record.sundayclosingtime != null" >
+        SundayClosingTime = #{record.sundayclosingtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bas_standartime
+    set ID = #{record.id,jdbcType=INTEGER},
+      TimeName = #{record.timename,jdbcType=VARCHAR},
+      SubordinateUnit = #{record.subordinateunit,jdbcType=INTEGER},
+      WorkingTime = #{record.workingtime,jdbcType=DATE},
+      ClosingTime = #{record.closingtime,jdbcType=DATE},
+      SaturdayWorkingTime = #{record.saturdayworkingtime,jdbcType=DATE},
+      SaturdayClosingTime = #{record.saturdayclosingtime,jdbcType=DATE},
+      SundayWorkingTime = #{record.sundayworkingtime,jdbcType=DATE},
+      SundayClosingTime = #{record.sundayclosingtime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.BasStandartime" >
+    update bas_standartime
+    <set >
+      <if test="timename != null" >
+        TimeName = #{timename,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateunit != null" >
+        SubordinateUnit = #{subordinateunit,jdbcType=INTEGER},
+      </if>
+      <if test="workingtime != null" >
+        WorkingTime = #{workingtime,jdbcType=DATE},
+      </if>
+      <if test="closingtime != null" >
+        ClosingTime = #{closingtime,jdbcType=DATE},
+      </if>
+      <if test="saturdayworkingtime != null" >
+        SaturdayWorkingTime = #{saturdayworkingtime,jdbcType=DATE},
+      </if>
+      <if test="saturdayclosingtime != null" >
+        SaturdayClosingTime = #{saturdayclosingtime,jdbcType=DATE},
+      </if>
+      <if test="sundayworkingtime != null" >
+        SundayWorkingTime = #{sundayworkingtime,jdbcType=DATE},
+      </if>
+      <if test="sundayclosingtime != null" >
+        SundayClosingTime = #{sundayclosingtime,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.BasStandartime" >
+    update bas_standartime
+    set TimeName = #{timename,jdbcType=VARCHAR},
+      SubordinateUnit = #{subordinateunit,jdbcType=INTEGER},
+      WorkingTime = #{workingtime,jdbcType=DATE},
+      ClosingTime = #{closingtime,jdbcType=DATE},
+      SaturdayWorkingTime = #{saturdayworkingtime,jdbcType=DATE},
+      SaturdayClosingTime = #{saturdayclosingtime,jdbcType=DATE},
+      SundayWorkingTime = #{sundayworkingtime,jdbcType=DATE},
+      SundayClosingTime = #{sundayclosingtime,jdbcType=DATE}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

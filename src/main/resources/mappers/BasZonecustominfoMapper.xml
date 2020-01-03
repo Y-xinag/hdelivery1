@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.BasZonecustominfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.BasZonecustominfo" >
+    <id column="CustomCode" property="customcode" jdbcType="INTEGER" />
+    <result column="CustomName" property="customname" jdbcType="VARCHAR" />
+    <result column="MobileNo" property="mobileno" jdbcType="INTEGER" />
+    <result column="CityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="CstomAddress" property="cstomaddress" jdbcType="VARCHAR" />
+    <result column="ZoneName" property="zonename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CustomCode, CustomName, MobileNo, CityName, CstomAddress, ZoneName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.BasZonecustominfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bas_zonecustominfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_zonecustominfo
+    where CustomCode = #{customcode,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bas_zonecustominfo
+    where CustomCode = #{customcode,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.BasZonecustominfoExample" >
+    delete from bas_zonecustominfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.BasZonecustominfo" >
+    insert into bas_zonecustominfo (CustomCode, CustomName, MobileNo, 
+      CityName, CstomAddress, ZoneName
+      )
+    values (#{customcode,jdbcType=INTEGER}, #{customname,jdbcType=VARCHAR}, #{mobileno,jdbcType=INTEGER}, 
+      #{cityname,jdbcType=VARCHAR}, #{cstomaddress,jdbcType=VARCHAR}, #{zonename,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.BasZonecustominfo" >
+    insert into bas_zonecustominfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customcode != null" >
+        CustomCode,
+      </if>
+      <if test="customname != null" >
+        CustomName,
+      </if>
+      <if test="mobileno != null" >
+        MobileNo,
+      </if>
+      <if test="cityname != null" >
+        CityName,
+      </if>
+      <if test="cstomaddress != null" >
+        CstomAddress,
+      </if>
+      <if test="zonename != null" >
+        ZoneName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customcode != null" >
+        #{customcode,jdbcType=INTEGER},
+      </if>
+      <if test="customname != null" >
+        #{customname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null" >
+        #{mobileno,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="cstomaddress != null" >
+        #{cstomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zonename != null" >
+        #{zonename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.BasZonecustominfoExample" resultType="java.lang.Integer" >
+    select count(*) from bas_zonecustominfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bas_zonecustominfo
+    <set >
+      <if test="record.customcode != null" >
+        CustomCode = #{record.customcode,jdbcType=INTEGER},
+      </if>
+      <if test="record.customname != null" >
+        CustomName = #{record.customname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileno != null" >
+        MobileNo = #{record.mobileno,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityname != null" >
+        CityName = #{record.cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cstomaddress != null" >
+        CstomAddress = #{record.cstomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zonename != null" >
+        ZoneName = #{record.zonename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bas_zonecustominfo
+    set CustomCode = #{record.customcode,jdbcType=INTEGER},
+      CustomName = #{record.customname,jdbcType=VARCHAR},
+      MobileNo = #{record.mobileno,jdbcType=INTEGER},
+      CityName = #{record.cityname,jdbcType=VARCHAR},
+      CstomAddress = #{record.cstomaddress,jdbcType=VARCHAR},
+      ZoneName = #{record.zonename,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.BasZonecustominfo" >
+    update bas_zonecustominfo
+    <set >
+      <if test="customname != null" >
+        CustomName = #{customname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null" >
+        MobileNo = #{mobileno,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null" >
+        CityName = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="cstomaddress != null" >
+        CstomAddress = #{cstomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zonename != null" >
+        ZoneName = #{zonename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CustomCode = #{customcode,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.BasZonecustominfo" >
+    update bas_zonecustominfo
+    set CustomName = #{customname,jdbcType=VARCHAR},
+      MobileNo = #{mobileno,jdbcType=INTEGER},
+      CityName = #{cityname,jdbcType=VARCHAR},
+      CstomAddress = #{cstomaddress,jdbcType=VARCHAR},
+      ZoneName = #{zonename,jdbcType=VARCHAR}
+    where CustomCode = #{customcode,jdbcType=INTEGER}
+  </update>
+</mapper>

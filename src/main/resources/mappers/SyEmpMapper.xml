@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.SyEmpMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.SyEmp" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="EmpName" property="empname" jdbcType="VARCHAR" />
+    <result column="EmpNo" property="empno" jdbcType="VARCHAR" />
+    <result column="Pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="QueryPwd" property="querypwd" jdbcType="VARCHAR" />
+    <result column="RoleID" property="roleid" jdbcType="INTEGER" />
+    <result column="EmpUnit" property="empunit" jdbcType="INTEGER" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="Disabled" property="disabled" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, EmpName, EmpNo, Pwd, QueryPwd, RoleID, EmpUnit, Remark, Disabled
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.SyEmpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sy_emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sy_emp
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sy_emp
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.SyEmpExample" >
+    delete from sy_emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.SyEmp" >
+    insert into sy_emp (ID, EmpName, EmpNo, 
+      Pwd, QueryPwd, RoleID, 
+      EmpUnit, Remark, Disabled
+      )
+    values (#{id,jdbcType=INTEGER}, #{empname,jdbcType=VARCHAR}, #{empno,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{querypwd,jdbcType=VARCHAR}, #{roleid,jdbcType=INTEGER}, 
+      #{empunit,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{disabled,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.SyEmp" >
+    insert into sy_emp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="empname != null" >
+        EmpName,
+      </if>
+      <if test="empno != null" >
+        EmpNo,
+      </if>
+      <if test="pwd != null" >
+        Pwd,
+      </if>
+      <if test="querypwd != null" >
+        QueryPwd,
+      </if>
+      <if test="roleid != null" >
+        RoleID,
+      </if>
+      <if test="empunit != null" >
+        EmpUnit,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="disabled != null" >
+        Disabled,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="empname != null" >
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="empno != null" >
+        #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="querypwd != null" >
+        #{querypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="empunit != null" >
+        #{empunit,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null" >
+        #{disabled,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.SyEmpExample" resultType="java.lang.Integer" >
+    select count(*) from sy_emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sy_emp
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.empname != null" >
+        EmpName = #{record.empname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empno != null" >
+        EmpNo = #{record.empno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null" >
+        Pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.querypwd != null" >
+        QueryPwd = #{record.querypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleid != null" >
+        RoleID = #{record.roleid,jdbcType=INTEGER},
+      </if>
+      <if test="record.empunit != null" >
+        EmpUnit = #{record.empunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disabled != null" >
+        Disabled = #{record.disabled,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sy_emp
+    set ID = #{record.id,jdbcType=INTEGER},
+      EmpName = #{record.empname,jdbcType=VARCHAR},
+      EmpNo = #{record.empno,jdbcType=VARCHAR},
+      Pwd = #{record.pwd,jdbcType=VARCHAR},
+      QueryPwd = #{record.querypwd,jdbcType=VARCHAR},
+      RoleID = #{record.roleid,jdbcType=INTEGER},
+      EmpUnit = #{record.empunit,jdbcType=INTEGER},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      Disabled = #{record.disabled,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.SyEmp" >
+    update sy_emp
+    <set >
+      <if test="empname != null" >
+        EmpName = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="empno != null" >
+        EmpNo = #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        Pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="querypwd != null" >
+        QueryPwd = #{querypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        RoleID = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="empunit != null" >
+        EmpUnit = #{empunit,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null" >
+        Disabled = #{disabled,jdbcType=BIT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.SyEmp" >
+    update sy_emp
+    set EmpName = #{empname,jdbcType=VARCHAR},
+      EmpNo = #{empno,jdbcType=VARCHAR},
+      Pwd = #{pwd,jdbcType=VARCHAR},
+      QueryPwd = #{querypwd,jdbcType=VARCHAR},
+      RoleID = #{roleid,jdbcType=INTEGER},
+      EmpUnit = #{empunit,jdbcType=INTEGER},
+      Remark = #{remark,jdbcType=VARCHAR},
+      Disabled = #{disabled,jdbcType=BIT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.DisWorkordersignMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.DisWorkordersign" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="WorkOrderID" property="workorderid" jdbcType="INTEGER" />
+    <result column="WorkSheetNo" property="worksheetno" jdbcType="VARCHAR" />
+    <result column="WorkOrderType" property="workordertype" jdbcType="BIT" />
+    <result column="SignType" property="signtype" jdbcType="BIT" />
+    <result column="CourierInt" property="courierint" jdbcType="INTEGER" />
+    <result column="CourierName" property="couriername" jdbcType="VARCHAR" />
+    <result column="Recipient" property="recipient" jdbcType="VARCHAR" />
+    <result column="SignUnit" property="signunit" jdbcType="INTEGER" />
+    <result column="SignTime" property="signtime" jdbcType="TIMESTAMP" />
+    <result column="InvalidateMark" property="invalidatemark" jdbcType="BIT" />
+    <result column="AbnormalMark" property="abnormalmark" jdbcType="VARCHAR" />
+    <result column="InputPersonCode" property="inputpersoncode" jdbcType="INTEGER" />
+    <result column="InputPersonID" property="inputpersonid" jdbcType="INTEGER" />
+    <result column="InputID" property="inputid" jdbcType="INTEGER" />
+    <result column="InputTime" property="inputtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, WorkOrderID, WorkSheetNo, WorkOrderType, SignType, CourierInt, CourierName, Recipient, 
+    SignUnit, SignTime, InvalidateMark, AbnormalMark, InputPersonCode, InputPersonID, 
+    InputID, InputTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.DisWorkordersignExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dis_workordersign
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dis_workordersign
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dis_workordersign
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.DisWorkordersignExample" >
+    delete from dis_workordersign
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.DisWorkordersign" >
+    insert into dis_workordersign (ID, WorkOrderID, WorkSheetNo, 
+      WorkOrderType, SignType, CourierInt, 
+      CourierName, Recipient, SignUnit, 
+      SignTime, InvalidateMark, AbnormalMark, 
+      InputPersonCode, InputPersonID, InputID, 
+      InputTime)
+    values (#{id,jdbcType=INTEGER}, #{workorderid,jdbcType=INTEGER}, #{worksheetno,jdbcType=VARCHAR}, 
+      #{workordertype,jdbcType=BIT}, #{signtype,jdbcType=BIT}, #{courierint,jdbcType=INTEGER}, 
+      #{couriername,jdbcType=VARCHAR}, #{recipient,jdbcType=VARCHAR}, #{signunit,jdbcType=INTEGER}, 
+      #{signtime,jdbcType=TIMESTAMP}, #{invalidatemark,jdbcType=BIT}, #{abnormalmark,jdbcType=VARCHAR}, 
+      #{inputpersoncode,jdbcType=INTEGER}, #{inputpersonid,jdbcType=INTEGER}, #{inputid,jdbcType=INTEGER}, 
+      #{inputtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.DisWorkordersign" >
+    insert into dis_workordersign
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="workorderid != null" >
+        WorkOrderID,
+      </if>
+      <if test="worksheetno != null" >
+        WorkSheetNo,
+      </if>
+      <if test="workordertype != null" >
+        WorkOrderType,
+      </if>
+      <if test="signtype != null" >
+        SignType,
+      </if>
+      <if test="courierint != null" >
+        CourierInt,
+      </if>
+      <if test="couriername != null" >
+        CourierName,
+      </if>
+      <if test="recipient != null" >
+        Recipient,
+      </if>
+      <if test="signunit != null" >
+        SignUnit,
+      </if>
+      <if test="signtime != null" >
+        SignTime,
+      </if>
+      <if test="invalidatemark != null" >
+        InvalidateMark,
+      </if>
+      <if test="abnormalmark != null" >
+        AbnormalMark,
+      </if>
+      <if test="inputpersoncode != null" >
+        InputPersonCode,
+      </if>
+      <if test="inputpersonid != null" >
+        InputPersonID,
+      </if>
+      <if test="inputid != null" >
+        InputID,
+      </if>
+      <if test="inputtime != null" >
+        InputTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="workorderid != null" >
+        #{workorderid,jdbcType=INTEGER},
+      </if>
+      <if test="worksheetno != null" >
+        #{worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="workordertype != null" >
+        #{workordertype,jdbcType=BIT},
+      </if>
+      <if test="signtype != null" >
+        #{signtype,jdbcType=BIT},
+      </if>
+      <if test="courierint != null" >
+        #{courierint,jdbcType=INTEGER},
+      </if>
+      <if test="couriername != null" >
+        #{couriername,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null" >
+        #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="signunit != null" >
+        #{signunit,jdbcType=INTEGER},
+      </if>
+      <if test="signtime != null" >
+        #{signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidatemark != null" >
+        #{invalidatemark,jdbcType=BIT},
+      </if>
+      <if test="abnormalmark != null" >
+        #{abnormalmark,jdbcType=VARCHAR},
+      </if>
+      <if test="inputpersoncode != null" >
+        #{inputpersoncode,jdbcType=INTEGER},
+      </if>
+      <if test="inputpersonid != null" >
+        #{inputpersonid,jdbcType=INTEGER},
+      </if>
+      <if test="inputid != null" >
+        #{inputid,jdbcType=INTEGER},
+      </if>
+      <if test="inputtime != null" >
+        #{inputtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.DisWorkordersignExample" resultType="java.lang.Integer" >
+    select count(*) from dis_workordersign
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dis_workordersign
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.workorderid != null" >
+        WorkOrderID = #{record.workorderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.worksheetno != null" >
+        WorkSheetNo = #{record.worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workordertype != null" >
+        WorkOrderType = #{record.workordertype,jdbcType=BIT},
+      </if>
+      <if test="record.signtype != null" >
+        SignType = #{record.signtype,jdbcType=BIT},
+      </if>
+      <if test="record.courierint != null" >
+        CourierInt = #{record.courierint,jdbcType=INTEGER},
+      </if>
+      <if test="record.couriername != null" >
+        CourierName = #{record.couriername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recipient != null" >
+        Recipient = #{record.recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signunit != null" >
+        SignUnit = #{record.signunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.signtime != null" >
+        SignTime = #{record.signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.invalidatemark != null" >
+        InvalidateMark = #{record.invalidatemark,jdbcType=BIT},
+      </if>
+      <if test="record.abnormalmark != null" >
+        AbnormalMark = #{record.abnormalmark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputpersoncode != null" >
+        InputPersonCode = #{record.inputpersoncode,jdbcType=INTEGER},
+      </if>
+      <if test="record.inputpersonid != null" >
+        InputPersonID = #{record.inputpersonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.inputid != null" >
+        InputID = #{record.inputid,jdbcType=INTEGER},
+      </if>
+      <if test="record.inputtime != null" >
+        InputTime = #{record.inputtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dis_workordersign
+    set ID = #{record.id,jdbcType=INTEGER},
+      WorkOrderID = #{record.workorderid,jdbcType=INTEGER},
+      WorkSheetNo = #{record.worksheetno,jdbcType=VARCHAR},
+      WorkOrderType = #{record.workordertype,jdbcType=BIT},
+      SignType = #{record.signtype,jdbcType=BIT},
+      CourierInt = #{record.courierint,jdbcType=INTEGER},
+      CourierName = #{record.couriername,jdbcType=VARCHAR},
+      Recipient = #{record.recipient,jdbcType=VARCHAR},
+      SignUnit = #{record.signunit,jdbcType=INTEGER},
+      SignTime = #{record.signtime,jdbcType=TIMESTAMP},
+      InvalidateMark = #{record.invalidatemark,jdbcType=BIT},
+      AbnormalMark = #{record.abnormalmark,jdbcType=VARCHAR},
+      InputPersonCode = #{record.inputpersoncode,jdbcType=INTEGER},
+      InputPersonID = #{record.inputpersonid,jdbcType=INTEGER},
+      InputID = #{record.inputid,jdbcType=INTEGER},
+      InputTime = #{record.inputtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.DisWorkordersign" >
+    update dis_workordersign
+    <set >
+      <if test="workorderid != null" >
+        WorkOrderID = #{workorderid,jdbcType=INTEGER},
+      </if>
+      <if test="worksheetno != null" >
+        WorkSheetNo = #{worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="workordertype != null" >
+        WorkOrderType = #{workordertype,jdbcType=BIT},
+      </if>
+      <if test="signtype != null" >
+        SignType = #{signtype,jdbcType=BIT},
+      </if>
+      <if test="courierint != null" >
+        CourierInt = #{courierint,jdbcType=INTEGER},
+      </if>
+      <if test="couriername != null" >
+        CourierName = #{couriername,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null" >
+        Recipient = #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="signunit != null" >
+        SignUnit = #{signunit,jdbcType=INTEGER},
+      </if>
+      <if test="signtime != null" >
+        SignTime = #{signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidatemark != null" >
+        InvalidateMark = #{invalidatemark,jdbcType=BIT},
+      </if>
+      <if test="abnormalmark != null" >
+        AbnormalMark = #{abnormalmark,jdbcType=VARCHAR},
+      </if>
+      <if test="inputpersoncode != null" >
+        InputPersonCode = #{inputpersoncode,jdbcType=INTEGER},
+      </if>
+      <if test="inputpersonid != null" >
+        InputPersonID = #{inputpersonid,jdbcType=INTEGER},
+      </if>
+      <if test="inputid != null" >
+        InputID = #{inputid,jdbcType=INTEGER},
+      </if>
+      <if test="inputtime != null" >
+        InputTime = #{inputtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.DisWorkordersign" >
+    update dis_workordersign
+    set WorkOrderID = #{workorderid,jdbcType=INTEGER},
+      WorkSheetNo = #{worksheetno,jdbcType=VARCHAR},
+      WorkOrderType = #{workordertype,jdbcType=BIT},
+      SignType = #{signtype,jdbcType=BIT},
+      CourierInt = #{courierint,jdbcType=INTEGER},
+      CourierName = #{couriername,jdbcType=VARCHAR},
+      Recipient = #{recipient,jdbcType=VARCHAR},
+      SignUnit = #{signunit,jdbcType=INTEGER},
+      SignTime = #{signtime,jdbcType=TIMESTAMP},
+      InvalidateMark = #{invalidatemark,jdbcType=BIT},
+      AbnormalMark = #{abnormalmark,jdbcType=VARCHAR},
+      InputPersonCode = #{inputpersoncode,jdbcType=INTEGER},
+      InputPersonID = #{inputpersonid,jdbcType=INTEGER},
+      InputID = #{inputid,jdbcType=INTEGER},
+      InputTime = #{inputtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

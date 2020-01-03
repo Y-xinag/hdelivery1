@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.logistics.dao.DisPropagandataskMapper" >
+  <resultMap id="BaseResultMap" type="com.example.logistics.model.DisPropagandatask" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Outline" property="outline" jdbcType="VARCHAR" />
+    <result column="ReleaseTime" property="releasetime" jdbcType="TIMESTAMP" />
+    <result column="FailureTime" property="failuretime" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="BIT" />
+    <result column="Content" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Outline, ReleaseTime, FailureTime, Status, Content
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.logistics.model.DisPropagandataskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dis_propagandatask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dis_propagandatask
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dis_propagandatask
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.logistics.model.DisPropagandataskExample" >
+    delete from dis_propagandatask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.logistics.model.DisPropagandatask" >
+    insert into dis_propagandatask (ID, Outline, ReleaseTime, 
+      FailureTime, Status, Content
+      )
+    values (#{id,jdbcType=INTEGER}, #{outline,jdbcType=VARCHAR}, #{releasetime,jdbcType=TIMESTAMP}, 
+      #{failuretime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}, #{content,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.logistics.model.DisPropagandatask" >
+    insert into dis_propagandatask
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="outline != null" >
+        Outline,
+      </if>
+      <if test="releasetime != null" >
+        ReleaseTime,
+      </if>
+      <if test="failuretime != null" >
+        FailureTime,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="content != null" >
+        Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="outline != null" >
+        #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failuretime != null" >
+        #{failuretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.logistics.model.DisPropagandataskExample" resultType="java.lang.Integer" >
+    select count(*) from dis_propagandatask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dis_propagandatask
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.outline != null" >
+        Outline = #{record.outline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releasetime != null" >
+        ReleaseTime = #{record.releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.failuretime != null" >
+        FailureTime = #{record.failuretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.content != null" >
+        Content = #{record.content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dis_propagandatask
+    set ID = #{record.id,jdbcType=INTEGER},
+      Outline = #{record.outline,jdbcType=VARCHAR},
+      ReleaseTime = #{record.releasetime,jdbcType=TIMESTAMP},
+      FailureTime = #{record.failuretime,jdbcType=TIMESTAMP},
+      Status = #{record.status,jdbcType=BIT},
+      Content = #{record.content,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.logistics.model.DisPropagandatask" >
+    update dis_propagandatask
+    <set >
+      <if test="outline != null" >
+        Outline = #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        ReleaseTime = #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failuretime != null" >
+        FailureTime = #{failuretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        Content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.logistics.model.DisPropagandatask" >
+    update dis_propagandatask
+    set Outline = #{outline,jdbcType=VARCHAR},
+      ReleaseTime = #{releasetime,jdbcType=TIMESTAMP},
+      FailureTime = #{failuretime,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=BIT},
+      Content = #{content,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
